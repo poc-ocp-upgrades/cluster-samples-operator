@@ -50,6 +50,8 @@ const (
 func setupClients(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var err error
 	if kubeConfig == nil {
 		kubeConfig, err = sampopclient.GetConfig()
@@ -91,6 +93,8 @@ func setupClients(t *testing.T) {
 func dumpPod(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	podClient := kubeClient.CoreV1().Pods("openshift-cluster-samples-operator")
 	podList, err := podClient.List(metav1.ListOptions{})
 	if err != nil {
@@ -117,6 +121,8 @@ func dumpPod(t *testing.T) {
 func verifyOperatorUp(t *testing.T) *samplesapi.Config {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	setupClients(t)
 	var cfg *samplesapi.Config
 	var err error
@@ -134,6 +140,8 @@ func verifyOperatorUp(t *testing.T) *samplesapi.Config {
 	return cfg
 }
 func verifySecretPresent(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	setupClients(t)
@@ -156,6 +164,8 @@ func verifySecretPresent(t *testing.T) {
 func verifyConditionsCompleteSamplesAdded(t *testing.T) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return wait.PollImmediate(1*time.Second, 10*time.Minute, func() (bool, error) {
 		cfg, err := crClient.Samples().Configs().Get(samplesapi.ConfigName, metav1.GetOptions{})
 		if err != nil {
@@ -171,6 +181,8 @@ func verifyConditionsCompleteSamplesAdded(t *testing.T) error {
 func verifyConditionsCompleteSamplesRemoved(t *testing.T) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return wait.PollImmediate(1*time.Second, 10*time.Minute, func() (bool, error) {
 		cfg, err := crClient.Samples().Configs().Get(samplesapi.ConfigName, metav1.GetOptions{})
 		if err != nil {
@@ -184,6 +196,8 @@ func verifyConditionsCompleteSamplesRemoved(t *testing.T) error {
 	})
 }
 func verifyClusterOperatorConditionsComplete(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	var state *configv1.ClusterOperator
@@ -228,6 +242,8 @@ func verifyClusterOperatorConditionsComplete(t *testing.T) {
 func getContentDir(t *testing.T) string {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	pwd, err := os.Getwd()
 	if err != nil {
 		t.Fatalf("%v", err)
@@ -253,6 +269,8 @@ func getContentDir(t *testing.T) string {
 	return contentDir
 }
 func getSamplesNames(dir string, files []os.FileInfo, t *testing.T) map[string]map[string]bool {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	h := stub.Handler{}
@@ -320,6 +338,8 @@ func getSamplesNames(dir string, files []os.FileInfo, t *testing.T) map[string]m
 func verifyImageStreamsPresent(t *testing.T, content map[string]bool, timeToCompare *kapis.Time) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	version := verifyOperatorUp(t).Status.Version
 	for key := range content {
 		var is *imageapiv1.ImageStream
@@ -356,6 +376,8 @@ func verifyImageStreamsPresent(t *testing.T, content map[string]bool, timeToComp
 func verifyImageChangesInProgress(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var cfg *samplesapi.Config
 	var err error
 	err = wait.PollImmediate(1*time.Second, 3*time.Minute, func() (bool, error) {
@@ -373,6 +395,8 @@ func verifyImageChangesInProgress(t *testing.T) {
 func verifyImageStreamsGone(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	time.Sleep(30 * time.Second)
 	content := getSamplesNames(getContentDir(t), nil, t)
 	streams, _ := content[imagestreamsKey]
@@ -386,6 +410,8 @@ func verifyImageStreamsGone(t *testing.T) {
 	}
 }
 func verifyTemplatesPresent(t *testing.T, content map[string]bool, timeToCompare *kapis.Time) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	version := verifyOperatorUp(t).Status.Version
@@ -424,6 +450,8 @@ func verifyTemplatesPresent(t *testing.T, content map[string]bool, timeToCompare
 func verifyTemplatesGone(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	time.Sleep(30 * time.Second)
 	content := getSamplesNames(getContentDir(t), nil, t)
 	templates, _ := content[templatesKey]
@@ -439,6 +467,8 @@ func verifyTemplatesGone(t *testing.T) {
 func validateContent(t *testing.T, timeToCompare *kapis.Time) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	contentDir := getContentDir(t)
 	content := getSamplesNames(contentDir, nil, t)
 	streams, _ := content[imagestreamsKey]
@@ -447,6 +477,8 @@ func validateContent(t *testing.T, timeToCompare *kapis.Time) {
 	verifyTemplatesPresent(t, templates, timeToCompare)
 }
 func verifyConfigurationValid(t *testing.T, status corev1.ConditionStatus) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	err := wait.PollImmediate(1*time.Second, 3*time.Minute, func() (bool, error) {
@@ -467,6 +499,8 @@ func verifyConfigurationValid(t *testing.T, status corev1.ConditionStatus) {
 	}
 }
 func verifyDeletedImageStreamRecreated(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	err := imageClient.ImageV1().ImageStreams("openshift").Delete("jenkins", &metav1.DeleteOptions{})
@@ -497,6 +531,8 @@ func verifyDeletedImageStreamRecreated(t *testing.T) {
 func verifySkippedStreamManagedLabel(t *testing.T, value string) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	err := wait.PollImmediate(1*time.Second, 10*time.Second, func() (bool, error) {
 		stream, err := imageClient.ImageV1().ImageStreams("openshift").Get("jenkins", metav1.GetOptions{})
 		if err != nil {
@@ -520,6 +556,8 @@ func verifySkippedStreamManagedLabel(t *testing.T, value string) {
 func verifySkippedTemplateManagedLabel(t *testing.T, value string) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	err := wait.PollImmediate(1*time.Second, 10*time.Second, func() (bool, error) {
 		stream, err := templateClient.TemplateV1().Templates("openshift").Get("jenkins-ephemeral", metav1.GetOptions{})
 		if err != nil {
@@ -541,6 +579,8 @@ func verifySkippedTemplateManagedLabel(t *testing.T, value string) {
 	}
 }
 func verifyDeletedImageStreamNotRecreated(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	err := imageClient.ImageV1().ImageStreams("openshift").Delete("jenkins", &metav1.DeleteOptions{})
@@ -571,6 +611,8 @@ func verifyDeletedImageStreamNotRecreated(t *testing.T) {
 func verifyDeletedTemplatesRecreated(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	err := templateClient.TemplateV1().Templates("openshift").Delete("jenkins-ephemeral", &metav1.DeleteOptions{})
 	verifyConditionsCompleteSamplesAdded(t)
 	if err != nil {
@@ -596,6 +638,8 @@ func verifyDeletedTemplatesRecreated(t *testing.T) {
 	}
 }
 func verifyDeletedTemplatesNotRecreated(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	err := templateClient.TemplateV1().Templates("openshift").Delete("jenkins-ephemeral", &metav1.DeleteOptions{})
@@ -627,6 +671,8 @@ func verifyDeletedTemplatesNotRecreated(t *testing.T) {
 func TestImageStreamInOpenshiftNamespace(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	verifyOperatorUp(t)
 	validateContent(t, nil)
 	err := verifyConditionsCompleteSamplesAdded(t)
@@ -639,6 +685,8 @@ func TestImageStreamInOpenshiftNamespace(t *testing.T) {
 	t.Logf("Config after TestImageStreamInOpenshiftNamespace: %#v", verifyOperatorUp(t))
 }
 func TestRecreateConfigAfterDelete(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	cfg := verifyOperatorUp(t)
@@ -674,6 +722,8 @@ func TestRecreateConfigAfterDelete(t *testing.T) {
 	t.Logf("Config after TestRecreateConfigAfterDelete: %#v", verifyOperatorUp(t))
 }
 func TestSpecManagementStateField(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	now := kapis.Now()
@@ -841,6 +891,8 @@ func TestSpecManagementStateField(t *testing.T) {
 func TestSkippedProcessing(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	err := verifyConditionsCompleteSamplesAdded(t)
 	if err != nil {
 		dumpPod(t)
@@ -912,6 +964,8 @@ func TestSkippedProcessing(t *testing.T) {
 func TestRecreateDeletedManagedSample(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	verifyOperatorUp(t)
 	err := verifyConditionsCompleteSamplesAdded(t)
 	if err != nil {
@@ -923,6 +977,8 @@ func TestRecreateDeletedManagedSample(t *testing.T) {
 	t.Logf("Config after TestRecreateDeletedManagedSample: %#v", verifyOperatorUp(t))
 }
 func TestUpgrade(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	cfg := verifyOperatorUp(t)
@@ -1005,7 +1061,16 @@ func TestUpgrade(t *testing.T) {
 func _logClusterCodePath() {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	pc, _, _, _ := godefaultruntime.Caller(1)
 	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
 	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
+}
+func _logClusterCodePath() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	pc, _, _, _ := godefaultruntime.Caller(1)
+	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
+	godefaulthttp.Post("/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
 }

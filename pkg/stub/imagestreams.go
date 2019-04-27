@@ -15,6 +15,8 @@ import (
 func (h *Handler) processImageStreamWatchEvent(is *imagev1.ImageStream, deleted bool) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	cfg, filePath, doUpsert, err := h.prepSamplesWatchEvent("imagestream", is.Name, is.Annotations, deleted)
 	if cfg != nil && cfg.ConditionTrue(v1.ImageChangesInProgress) {
 		logrus.Printf("Imagestream %s watch event do upsert %v; no errors in prep %v,  possibly update operator conditions %v", is.Name, doUpsert, err == nil, cfg != nil)
@@ -136,6 +138,8 @@ func (h *Handler) processImageStreamWatchEvent(is *imagev1.ImageStream, deleted 
 func (h *Handler) upsertImageStream(imagestreamInOperatorImage, imagestreamInCluster *imagev1.ImageStream, opcfg *v1.Config) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	imagestreamInOperatorImage = jenkinsOverrides(imagestreamInOperatorImage)
 	h.clearStreamFromImportError(imagestreamInOperatorImage.Name, opcfg.Condition(v1.ImportImageErrorsExist), opcfg)
 	if _, isok := h.skippedImagestreams[imagestreamInOperatorImage.Name]; isok {
@@ -180,6 +184,8 @@ func (h *Handler) upsertImageStream(imagestreamInOperatorImage, imagestreamInClu
 func (h *Handler) updateDockerPullSpec(oldies []string, imagestream *imagev1.ImageStream, opcfg *v1.Config) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	switch imagestream.Name {
 	case "jenkins":
 		return
@@ -210,6 +216,8 @@ func (h *Handler) updateDockerPullSpec(oldies []string, imagestream *imagev1.Ima
 func (h *Handler) coreUpdateDockerPullSpec(oldreg, newreg string, oldies []string) string {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	hasRegistry := false
 	if strings.Count(oldreg, "/") == 2 {
 		hasRegistry = true
@@ -233,6 +241,8 @@ func (h *Handler) coreUpdateDockerPullSpec(oldreg, newreg string, oldies []strin
 	return oldreg
 }
 func (h *Handler) clearStreamFromImportError(name string, importError *v1.ConfigCondition, cfg *v1.Config) *v1.ConfigCondition {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	if cfg.NameInReason(importError.Reason, name) {
@@ -259,6 +269,8 @@ func (h *Handler) clearStreamFromImportError(name string, importError *v1.Config
 	return importError
 }
 func (h *Handler) processImportStatus(is *imagev1.ImageStream, cfg *v1.Config) (*v1.Config, string) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	pending := false

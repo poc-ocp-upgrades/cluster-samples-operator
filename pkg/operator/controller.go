@@ -59,6 +59,8 @@ type Controller struct {
 func NewController() (*Controller, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	kubeconfig, err := sampopclient.GetConfig()
 	if err != nil {
 		return nil, err
@@ -115,6 +117,8 @@ func NewController() (*Controller, error) {
 func (c *Controller) Run(stopCh <-chan struct{}) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	defer c.crWorkqueue.ShutDown()
 	defer c.osSecWorkqueue.ShutDown()
 	defer c.opSecWorkqueue.ShutDown()
@@ -157,12 +161,16 @@ type crGetter struct{}
 func (g *crGetter) Get(c *Controller, key string) (runtime.Object, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return c.listers.Config.Get(sampopapi.ConfigName)
 }
 
 type osSecretGetter struct{}
 
 func (g *osSecretGetter) Get(c *Controller, key string) (runtime.Object, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return c.listers.OpenShiftNamespaceSecrets.Get(key)
@@ -173,12 +181,16 @@ type opSecretGetter struct{}
 func (g *opSecretGetter) Get(c *Controller, key string) (runtime.Object, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return c.listers.OperatorNamespaceSecrets.Get(key)
 }
 
 type isGetter struct{}
 
 func (g *isGetter) Get(c *Controller, key string) (runtime.Object, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return c.listers.ImageStreams.Get(key)
@@ -189,9 +201,13 @@ type tGetter struct{}
 func (g *tGetter) Get(c *Controller, key string) (runtime.Object, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return c.listers.Templates.Get(key)
 }
 func (c *Controller) handleWork(getter runtimeObjectGetter, o interface{}) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	logrus.Debugf("handleWork key %s getter %#v", o, getter)
@@ -226,6 +242,8 @@ type crQueueKeyGen struct{}
 func (c *crQueueKeyGen) Key(o interface{}) string {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	cr := o.(*sampopapi.Config)
 	return cr.Name
 }
@@ -233,6 +251,8 @@ func (c *crQueueKeyGen) Key(o interface{}) string {
 type secretQueueKeyGen struct{}
 
 func (c *secretQueueKeyGen) Key(o interface{}) string {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	secret := o.(*corev1.Secret)
@@ -244,6 +264,8 @@ type imagestreamQueueKeyGen struct{}
 func (c *imagestreamQueueKeyGen) Key(o interface{}) string {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	imagestream := o.(*imagev1.ImageStream)
 	return imagestream.Name
 }
@@ -251,6 +273,8 @@ func (c *imagestreamQueueKeyGen) Key(o interface{}) string {
 type templateQueueKeyGen struct{}
 
 func (c *templateQueueKeyGen) Key(o interface{}) string {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	template := o.(*templatev1.Template)
@@ -264,6 +288,8 @@ type queueWorker struct {
 }
 
 func (w *queueWorker) workqueueProcessor() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	for {
@@ -295,6 +321,8 @@ func (w *queueWorker) workqueueProcessor() {
 	}
 }
 func (c *Controller) commonInformerEventHandler(keygen queueKeyGen, wq workqueue.RateLimitingInterface) cache.ResourceEventHandlerFuncs {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return cache.ResourceEventHandlerFuncs{AddFunc: func(o interface{}) {
@@ -338,9 +366,13 @@ func (c *Controller) commonInformerEventHandler(keygen queueKeyGen, wq workqueue
 func (c *Controller) crInformerEventHandler() cache.ResourceEventHandlerFuncs {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return c.commonInformerEventHandler(&crQueueKeyGen{}, c.crWorkqueue)
 }
 func (c *Controller) osSecretInformerEventHandler() cache.ResourceEventHandlerFuncs {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return c.commonInformerEventHandler(&secretQueueKeyGen{}, c.osSecWorkqueue)
@@ -348,14 +380,20 @@ func (c *Controller) osSecretInformerEventHandler() cache.ResourceEventHandlerFu
 func (c *Controller) opSecretInformerEventHandler() cache.ResourceEventHandlerFuncs {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return c.commonInformerEventHandler(&secretQueueKeyGen{}, c.opSecWorkqueue)
 }
 func (c *Controller) imagestreamInformerEventHandler() cache.ResourceEventHandlerFuncs {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return c.commonInformerEventHandler(&imagestreamQueueKeyGen{}, c.isWorkqueue)
 }
 func (c *Controller) templateInformerEventHandler() cache.ResourceEventHandlerFuncs {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return c.commonInformerEventHandler(&templateQueueKeyGen{}, c.tWorkqueue)

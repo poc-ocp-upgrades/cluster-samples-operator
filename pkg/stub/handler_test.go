@@ -32,6 +32,8 @@ var (
 func TestWrongSampleResourceName(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	h, cfg, event := setup()
 	cfg.Name = "foo"
 	cfg.Status.Conditions = nil
@@ -39,6 +41,8 @@ func TestWrongSampleResourceName(t *testing.T) {
 	validate(true, err, "", cfg, []v1.ConfigConditionType{}, []corev1.ConditionStatus{}, t)
 }
 func TestNoArchOrDist(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	h, cfg, event := setup()
@@ -53,6 +57,8 @@ func TestNoArchOrDist(t *testing.T) {
 func TestWithDist(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	h, cfg, event := setup()
 	processCred(&h, cfg, t)
 	err := h.Handle(event)
@@ -63,6 +69,8 @@ func TestWithDist(t *testing.T) {
 	validate(true, err, "", cfg, conditions, statuses, t)
 }
 func TestWithArchDist(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	h, cfg, event := setup()
@@ -79,6 +87,8 @@ func TestWithArchDist(t *testing.T) {
 func TestWithArch(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	h, cfg, event := setup()
 	processCred(&h, cfg, t)
 	cfg.Spec.Architectures = []string{v1.X86Architecture}
@@ -88,12 +98,16 @@ func TestWithArch(t *testing.T) {
 func TestWithBadArch(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	h, cfg, event := setup()
 	cfg.Spec.Architectures = []string{"bad"}
 	h.Handle(event)
 	invalidConfig(t, "architecture bad unsupported", cfg.Condition(v1.ConfigurationValid))
 }
 func TestManagementState(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	h, cfg, event := setup()
@@ -158,6 +172,8 @@ func TestManagementState(t *testing.T) {
 func TestSkipped(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	h, cfg, event := setup()
 	processCred(&h, cfg, t)
 	iskeys := getISKeys()
@@ -200,6 +216,8 @@ func TestSkipped(t *testing.T) {
 	}
 }
 func TestProcessed(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	h, cfg, event := setup()
@@ -260,6 +278,8 @@ func TestProcessed(t *testing.T) {
 func TestImageStreamEvent(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	h, cfg, event := setup()
 	processCred(&h, cfg, t)
 	mimic(&h, x86OCPContentRootDir)
@@ -295,6 +315,8 @@ func TestImageStreamEvent(t *testing.T) {
 func TestTemplateEvent(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	h, cfg, event := setup()
 	processCred(&h, cfg, t)
 	mimic(&h, x86OCPContentRootDir)
@@ -314,6 +336,8 @@ func TestTemplateEvent(t *testing.T) {
 	}
 }
 func TestCreateDeleteSecretBeforeCR(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	h, cfg, event := setup()
@@ -338,6 +362,8 @@ func TestCreateDeleteSecretBeforeCR(t *testing.T) {
 func TestCreateDeleteSecretAfterCR(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	h, cfg, event := setup()
 	err := h.Handle(event)
 	statuses := []corev1.ConditionStatus{corev1.ConditionFalse, corev1.ConditionFalse, corev1.ConditionTrue, corev1.ConditionFalse, corev1.ConditionFalse, corev1.ConditionFalse, corev1.ConditionFalse}
@@ -359,6 +385,8 @@ func TestCreateDeleteSecretAfterCR(t *testing.T) {
 func setup() (Handler, *v1.Config, v1.Event) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	h := NewTestHandler()
 	cfg, _ := h.CreateDefaultResourceIfNeeded(nil)
 	cfg = h.initConditions(cfg)
@@ -369,6 +397,8 @@ func setup() (Handler, *v1.Config, v1.Event) {
 	return h, cfg, v1.Event{Object: cfg}
 }
 func processCred(h *Handler, cfg *v1.Config, t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	if !cfg.ConditionFalse(v1.ImportCredentialsExist) {
@@ -385,6 +415,8 @@ func processCred(h *Handler, cfg *v1.Config, t *testing.T) {
 func TestSameSecret(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	h, cfg, event := setup()
 	err := h.Handle(event)
 	statuses := []corev1.ConditionStatus{corev1.ConditionFalse, corev1.ConditionFalse, corev1.ConditionTrue, corev1.ConditionFalse, corev1.ConditionFalse, corev1.ConditionFalse, corev1.ConditionFalse}
@@ -399,6 +431,8 @@ func TestSameSecret(t *testing.T) {
 func TestSecretAPIError(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	h, cfg, event := setup()
 	err := h.Handle(event)
 	statuses := []corev1.ConditionStatus{corev1.ConditionFalse, corev1.ConditionFalse, corev1.ConditionTrue, corev1.ConditionFalse, corev1.ConditionFalse, corev1.ConditionFalse, corev1.ConditionFalse}
@@ -411,6 +445,8 @@ func TestSecretAPIError(t *testing.T) {
 	validate(true, err, "", cfg, conditions, statuses, t)
 }
 func TestImageGetError(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	errors := []error{fmt.Errorf("getstreamerror"), kerrors.NewNotFound(schema.GroupResource{}, "getstreamerror")}
@@ -431,6 +467,8 @@ func TestImageGetError(t *testing.T) {
 	}
 }
 func TestImageStreamImportError(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	two := int64(2)
@@ -462,6 +500,8 @@ func TestImageStreamImportError(t *testing.T) {
 func TestImageStreamImportErrorRecovery(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	two := int64(2)
 	one := int64(1)
 	stream := &imagev1.ImageStream{ObjectMeta: metav1.ObjectMeta{Name: "foo", Annotations: map[string]string{v1.SamplesVersionAnnotation: TestVersion}}, Spec: imagev1.ImageStreamSpec{Tags: []imagev1.TagReference{{Name: "1", Generation: &two}, {Name: "2", Generation: &one}}}, Status: imagev1.ImageStreamStatus{Tags: []imagev1.NamedTagEventList{{Tag: "1", Items: []imagev1.TagEvent{{Generation: two}}}, {Tag: "2", Items: []imagev1.TagEvent{{Generation: two}}}}}}
@@ -490,6 +530,8 @@ func TestImageStreamImportErrorRecovery(t *testing.T) {
 func TestImageImportRequestCreation(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	one := int64(1)
 	stream := &imagev1.ImageStream{ObjectMeta: metav1.ObjectMeta{Name: "foo", Annotations: map[string]string{v1.SamplesVersionAnnotation: TestVersion}}, Spec: imagev1.ImageStreamSpec{Tags: []imagev1.TagReference{{Name: "1", From: &corev1.ObjectReference{Name: "myreg.myrepo.myname:latest", Kind: "DockerImage"}, Generation: &one}}}, Status: imagev1.ImageStreamStatus{Tags: []imagev1.NamedTagEventList{{Tag: "1", Items: []imagev1.TagEvent{{Generation: one}}}}}}
 	isi, err := importTag(stream, "1")
@@ -498,6 +540,8 @@ func TestImageImportRequestCreation(t *testing.T) {
 	}
 }
 func TestTemplateGetEreror(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	errors := []error{fmt.Errorf("gettemplateerror"), kerrors.NewNotFound(schema.GroupResource{}, "gettemplateerror")}
@@ -520,6 +564,8 @@ func TestTemplateGetEreror(t *testing.T) {
 func TestDeletedCR(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	h, cfg, event := setup()
 	event.Deleted = true
 	err := h.Handle(event)
@@ -527,6 +573,8 @@ func TestDeletedCR(t *testing.T) {
 	validate(true, err, "", cfg, conditions, statuses, t)
 }
 func TestSameCR(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	h, cfg, event := setup()
@@ -545,6 +593,8 @@ func TestSameCR(t *testing.T) {
 func TestBadTopDirList(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	h, cfg, event := setup()
 	processCred(&h, cfg, t)
 	fakefinder := h.Filefinder.(*fakeResourceFileLister)
@@ -554,6 +604,8 @@ func TestBadTopDirList(t *testing.T) {
 	validate(false, err, "badtopdir", cfg, conditions, statuses, t)
 }
 func TestBadSubDirList(t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	h, cfg, event := setup()
@@ -568,6 +620,8 @@ func TestBadSubDirList(t *testing.T) {
 func TestBadTopLevelStatus(t *testing.T) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	h, cfg, event := setup()
 	processCred(&h, cfg, t)
 	fakestatus := h.crdwrapper.(*fakeCRDWrapper)
@@ -577,6 +631,8 @@ func TestBadTopLevelStatus(t *testing.T) {
 	validate(false, err, "badsdkupdate", cfg, conditions, statuses, t)
 }
 func invalidConfig(t *testing.T, msg string, cfgValid *v1.ConfigCondition) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	if cfgValid.Status != corev1.ConditionFalse {
@@ -589,14 +645,20 @@ func invalidConfig(t *testing.T, msg string, cfgValid *v1.ConfigCondition) {
 func getISKeys() []string {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return []string{"foo", "bar"}
 }
 func getTKeys() []string {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return []string{"bo", "go"}
 }
 func mimic(h *Handler, topdir string) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	cache.ClearUpsertsCache()
@@ -614,6 +676,8 @@ func mimic(h *Handler, topdir string) {
 	faketempgetter.templates = map[string]*templatev1.Template{topdir + "/templates/bo": bo, topdir + "/templates/go": gogo, "bo": bo, "go": gogo}
 }
 func validate(succeed bool, err error, errstr string, cfg *v1.Config, statuses []v1.ConfigConditionType, conditions []corev1.ConditionStatus, t *testing.T) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	if succeed && err != nil {
@@ -645,6 +709,8 @@ func validate(succeed bool, err error, errstr string, cfg *v1.Config, statuses [
 	}
 }
 func NewTestHandler() Handler {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	h := Handler{}
@@ -680,9 +746,13 @@ type fakeFileInfo struct {
 func (f *fakeFileInfo) Name() string {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return f.name
 }
 func (f *fakeFileInfo) Size() int64 {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return f.size
@@ -690,9 +760,13 @@ func (f *fakeFileInfo) Size() int64 {
 func (f *fakeFileInfo) Mode() os.FileMode {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return f.mode
 }
 func (f *fakeFileInfo) ModTime() time.Time {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return f.modeTime
@@ -700,9 +774,13 @@ func (f *fakeFileInfo) ModTime() time.Time {
 func (f *fakeFileInfo) Sys() interface{} {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return f.sys
 }
 func (f *fakeFileInfo) IsDir() bool {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return f.dir
@@ -714,6 +792,8 @@ type fakeImageStreamFromFileGetter struct {
 }
 
 func (f *fakeImageStreamFromFileGetter) Get(fullFilePath string) (*imagev1.ImageStream, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	if f.err != nil {
@@ -731,6 +811,8 @@ type fakeTemplateFromFileGetter struct {
 func (f *fakeTemplateFromFileGetter) Get(fullFilePath string) (*templatev1.Template, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if f.err != nil {
 		return nil, f.err
 	}
@@ -744,6 +826,8 @@ type fakeResourceFileLister struct {
 }
 
 func (f *fakeResourceFileLister) List(dir string) ([]os.FileInfo, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	err, _ := f.errors[dir]
@@ -773,6 +857,8 @@ type fakeImageStreamClientWrapper struct {
 func (f *fakeImageStreamClientWrapper) Get(namespace, name string, opts metav1.GetOptions) (*imagev1.ImageStream, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	err, _ := f.geterrors[name]
 	if err != nil {
 		return nil, err
@@ -781,6 +867,8 @@ func (f *fakeImageStreamClientWrapper) Get(namespace, name string, opts metav1.G
 	return is, nil
 }
 func (f *fakeImageStreamClientWrapper) List(namespace string, opts metav1.ListOptions) (*imagev1.ImageStreamList, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	err, _ := f.geterrors[namespace]
@@ -794,6 +882,8 @@ func (f *fakeImageStreamClientWrapper) List(namespace string, opts metav1.ListOp
 	return list, nil
 }
 func (f *fakeImageStreamClientWrapper) Create(namespace string, stream *imagev1.ImageStream) (*imagev1.ImageStream, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	if stream == nil {
@@ -810,14 +900,20 @@ func (f *fakeImageStreamClientWrapper) Create(namespace string, stream *imagev1.
 func (f *fakeImageStreamClientWrapper) Update(namespace string, stream *imagev1.ImageStream) (*imagev1.ImageStream, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return f.Create(namespace, stream)
 }
 func (f *fakeImageStreamClientWrapper) Delete(namespace, name string, opts *metav1.DeleteOptions) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return nil
 }
 func (f *fakeImageStreamClientWrapper) Watch(namespace string) (watch.Interface, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return nil, nil
@@ -834,6 +930,8 @@ type fakeTemplateClientWrapper struct {
 func (f *fakeTemplateClientWrapper) Get(namespace, name string, opts metav1.GetOptions) (*templatev1.Template, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	err, _ := f.geterrors[name]
 	if err != nil {
 		return nil, err
@@ -842,6 +940,8 @@ func (f *fakeTemplateClientWrapper) Get(namespace, name string, opts metav1.GetO
 	return is, nil
 }
 func (f *fakeTemplateClientWrapper) List(namespace string, opts metav1.ListOptions) (*templatev1.TemplateList, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	err, _ := f.geterrors[namespace]
@@ -855,6 +955,8 @@ func (f *fakeTemplateClientWrapper) List(namespace string, opts metav1.ListOptio
 	return list, nil
 }
 func (f *fakeTemplateClientWrapper) Create(namespace string, t *templatev1.Template) (*templatev1.Template, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	if t == nil {
@@ -871,14 +973,20 @@ func (f *fakeTemplateClientWrapper) Create(namespace string, t *templatev1.Templ
 func (f *fakeTemplateClientWrapper) Update(namespace string, t *templatev1.Template) (*templatev1.Template, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return f.Create(namespace, t)
 }
 func (f *fakeTemplateClientWrapper) Delete(namespace, name string, opts *metav1.DeleteOptions) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return nil
 }
 func (f *fakeTemplateClientWrapper) Watch(namespace string) (watch.Interface, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return nil, nil
@@ -892,12 +1000,16 @@ type fakeSecretClientWrapper struct {
 func (f *fakeSecretClientWrapper) Create(namespace string, s *corev1.Secret) (*corev1.Secret, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if f.err != nil {
 		return nil, f.err
 	}
 	return s, nil
 }
 func (f *fakeSecretClientWrapper) Update(namespace string, s *corev1.Secret) (*corev1.Secret, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	if f.err != nil {
@@ -908,9 +1020,13 @@ func (f *fakeSecretClientWrapper) Update(namespace string, s *corev1.Secret) (*c
 func (f *fakeSecretClientWrapper) Delete(namespace, name string, opts *metav1.DeleteOptions) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return f.err
 }
 func (f *fakeSecretClientWrapper) Get(namespace, name string) (*corev1.Secret, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return f.s, f.err
@@ -919,6 +1035,8 @@ func (f *fakeSecretClientWrapper) Get(namespace, name string) (*corev1.Secret, e
 type fakeInClusterInitter struct{}
 
 func (f *fakeInClusterInitter) init(h *Handler, restconfig *restclient.Config) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 }
@@ -933,9 +1051,13 @@ type fakeCRDWrapper struct {
 func (f *fakeCRDWrapper) UpdateStatus(opcfg *v1.Config) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return f.updateerr
 }
 func (f *fakeCRDWrapper) Update(opcfg *v1.Config) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return f.updateerr
@@ -943,9 +1065,13 @@ func (f *fakeCRDWrapper) Update(opcfg *v1.Config) error {
 func (f *fakeCRDWrapper) Create(opcfg *v1.Config) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return f.createerr
 }
 func (f *fakeCRDWrapper) Get(name string) (*v1.Config, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return f.cfg, f.geterr
@@ -961,14 +1087,20 @@ type fakeCVOWrapper struct {
 func (f *fakeCVOWrapper) UpdateStatus(state *configv1.ClusterOperator) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return f.updateerr
 }
 func (f *fakeCVOWrapper) Create(state *configv1.ClusterOperator) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return f.createerr
 }
 func (f *fakeCVOWrapper) Get(name string) (*configv1.ClusterOperator, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return f.state, f.geterr

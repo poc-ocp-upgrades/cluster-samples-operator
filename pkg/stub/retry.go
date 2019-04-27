@@ -12,6 +12,8 @@ import (
 func importTag(stream *imagev1.ImageStream, tag string) (*imagev1.ImageStreamImport, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	finalTag, existing, multiple, err := followTagReferenceV1(stream, tag)
 	if err != nil {
 		return nil, err
@@ -28,6 +30,8 @@ func importTag(stream *imagev1.ImageStream, tag string) (*imagev1.ImageStreamImp
 	return newImageStreamImportTags(stream, map[string]string{tag: existing.From.Name}), nil
 }
 func followTagReferenceV1(stream *imagev1.ImageStream, tag string) (finalTag string, ref *imagev1.TagReference, multiple bool, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	seen := sets.NewString()
@@ -58,6 +62,8 @@ func followTagReferenceV1(stream *imagev1.ImageStream, tag string) (finalTag str
 func newImageStreamImportTags(stream *imagev1.ImageStream, tags map[string]string) *imagev1.ImageStreamImport {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	isi := newImageStreamImport(stream)
 	for tag, from := range tags {
 		var insecure, scheduled bool
@@ -81,10 +87,14 @@ func newImageStreamImportTags(stream *imagev1.ImageStream, tags map[string]strin
 func newImageStreamImport(stream *imagev1.ImageStream) *imagev1.ImageStreamImport {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	isi := &imagev1.ImageStreamImport{ObjectMeta: kapis.ObjectMeta{Name: stream.Name, Namespace: stream.Namespace, ResourceVersion: stream.ResourceVersion}, Spec: imagev1.ImageStreamImportSpec{Import: true}}
 	return isi
 }
 func splitImageStreamTag(nameAndTag string) (tag string) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	parts := strings.SplitN(nameAndTag, ":", 2)
@@ -97,6 +107,8 @@ func splitImageStreamTag(nameAndTag string) (tag string) {
 	return tag
 }
 func getReferencePolicy() imagev1.TagReferencePolicy {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	ref := imagev1.TagReferencePolicy{}

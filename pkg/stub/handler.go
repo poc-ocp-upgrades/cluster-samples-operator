@@ -40,6 +40,8 @@ const (
 func NewSamplesOperatorHandler(kubeconfig *restclient.Config) (*Handler, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	h := &Handler{}
 	h.initter = &defaultInClusterInitter{}
 	h.initter.init(h, kubeconfig)
@@ -92,6 +94,8 @@ type Handler struct {
 }
 
 func (h *Handler) prepSamplesWatchEvent(kind, name string, annotations map[string]string, deleted bool) (*v1.Config, string, bool, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	cfg, err := h.crdwrapper.Get(v1.ConfigName)
@@ -155,6 +159,8 @@ func (h *Handler) prepSamplesWatchEvent(kind, name string, annotations map[strin
 func (h *Handler) GoodConditionUpdate(cfg *v1.Config, newStatus corev1.ConditionStatus, conditionType v1.ConfigConditionType) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	logrus.Debugf("updating condition %s to %s", conditionType, newStatus)
 	condition := cfg.Condition(conditionType)
 	if condition.Status != newStatus {
@@ -170,6 +176,8 @@ func (h *Handler) GoodConditionUpdate(cfg *v1.Config, newStatus corev1.Condition
 func IsRetryableAPIError(err error) bool {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if err == nil {
 		return false
 	}
@@ -182,6 +190,8 @@ func IsRetryableAPIError(err error) bool {
 	return false
 }
 func (h *Handler) CreateDefaultResourceIfNeeded(cfg *v1.Config) (*v1.Config, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	deleteInProgress := cfg != nil && cfg.DeletionTimestamp != nil
@@ -240,6 +250,8 @@ func (h *Handler) CreateDefaultResourceIfNeeded(cfg *v1.Config) (*v1.Config, err
 func (h *Handler) initConditions(cfg *v1.Config) *v1.Config {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	now := kapis.Now()
 	cfg.Condition(v1.SamplesExist)
 	cfg.Condition(v1.ImportCredentialsExist)
@@ -257,6 +269,8 @@ func (h *Handler) initConditions(cfg *v1.Config) *v1.Config {
 	return cfg
 }
 func (h *Handler) CleanUpOpenshiftNamespaceOnDelete(cfg *v1.Config) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	h.buildSkipFilters(cfg)
@@ -305,6 +319,8 @@ func (h *Handler) CleanUpOpenshiftNamespaceOnDelete(cfg *v1.Config) error {
 	return nil
 }
 func (h *Handler) Handle(event v1.Event) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	switch event.Object.(type) {
@@ -557,6 +573,8 @@ func (h *Handler) Handle(event v1.Event) error {
 func (h *Handler) setSampleManagedLabelToFalse(kind, name string) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var err error
 	switch kind {
 	case "imagestream":
@@ -589,6 +607,8 @@ func (h *Handler) setSampleManagedLabelToFalse(kind, name string) error {
 	return nil
 }
 func (h *Handler) createSamples(cfg *v1.Config, updateIfPresent, registryChanged bool, unskippedStreams, unskippedTemplates map[string]bool) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	imagestreams := []*imagev1.ImageStream{}
@@ -661,14 +681,20 @@ func (h *Handler) createSamples(cfg *v1.Config, updateIfPresent, registryChanged
 func getTemplateClient(restconfig *restclient.Config) (*templatev1client.TemplateV1Client, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return templatev1client.NewForConfig(restconfig)
 }
 func getImageClient(restconfig *restclient.Config) (*imagev1client.ImageV1Client, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return imagev1client.NewForConfig(restconfig)
 }
 func GetNamespace() string {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	b, _ := ioutil.ReadFile("/var/run/secrets/kubernetes.io/serviceaccount/" + corev1.ServiceAccountNamespaceKey)

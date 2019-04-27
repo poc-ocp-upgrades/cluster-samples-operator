@@ -16,6 +16,8 @@ import (
 func TestMain(m *testing.M) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	kubeconfig, err := sampopclient.GetConfig()
 	if err != nil {
 		fmt.Printf("%#v", err)
@@ -44,6 +46,8 @@ func TestMain(m *testing.M) {
 	os.Exit(m.Run())
 }
 func waitForOperator() error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	depClient := kubeClient.AppsV1().Deployments("openshift-cluster-samples-operator")

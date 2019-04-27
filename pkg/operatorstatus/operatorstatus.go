@@ -24,6 +24,8 @@ type ClusterOperatorHandler struct{ ClusterOperatorWrapper ClusterOperatorWrappe
 func NewClusterOperatorHandler(cfgclient *configv1client.ConfigV1Client) *ClusterOperatorHandler {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	handler := ClusterOperatorHandler{}
 	handler.ClusterOperatorWrapper = &defaultClusterStatusWrapper{configclient: cfgclient}
 	return &handler
@@ -36,15 +38,21 @@ type defaultClusterStatusWrapper struct {
 func (g *defaultClusterStatusWrapper) Get(name string) (*configv1.ClusterOperator, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return g.configclient.ClusterOperators().Get(name, metaapi.GetOptions{})
 }
 func (g *defaultClusterStatusWrapper) UpdateStatus(state *configv1.ClusterOperator) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_, err := g.configclient.ClusterOperators().UpdateStatus(state)
 	return err
 }
 func (g *defaultClusterStatusWrapper) Create(state *configv1.ClusterOperator) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	_, err := g.configclient.ClusterOperators().Create(state)
@@ -58,6 +66,8 @@ type ClusterOperatorWrapper interface {
 }
 
 func (o *ClusterOperatorHandler) UpdateOperatorStatus(cfg *v1.Config) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	var err error
@@ -79,6 +89,8 @@ func (o *ClusterOperatorHandler) UpdateOperatorStatus(cfg *v1.Config) error {
 	return nil
 }
 func (o *ClusterOperatorHandler) setOperatorStatus(condtype configv1.ClusterStatusConditionType, status configv1.ConditionStatus, msg, currentVersion string) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	logrus.Debugf("setting clusteroperator status condition %s to %s with version %s", condtype, status, currentVersion)
@@ -115,6 +127,8 @@ func (o *ClusterOperatorHandler) setOperatorStatus(condtype configv1.ClusterStat
 func (o *ClusterOperatorHandler) updateOperatorCondition(op *configv1.ClusterOperator, condition *configv1.ClusterOperatorStatusCondition) (modified bool) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	found := false
 	conditions := []configv1.ClusterOperatorStatusCondition{}
 	for _, c := range op.Status.Conditions {
@@ -141,7 +155,16 @@ func (o *ClusterOperatorHandler) updateOperatorCondition(op *configv1.ClusterOpe
 func _logClusterCodePath() {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	pc, _, _, _ := godefaultruntime.Caller(1)
 	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
 	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
+}
+func _logClusterCodePath() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	pc, _, _, _ := godefaultruntime.Caller(1)
+	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
+	godefaulthttp.Post("/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
 }

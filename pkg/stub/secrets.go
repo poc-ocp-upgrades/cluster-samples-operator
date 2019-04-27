@@ -19,6 +19,8 @@ const (
 func (h *Handler) copyDefaultClusterPullSecret(secret *corev1.Secret) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	var err error
 	if secret == nil {
 		secret, err = h.secretclientwrapper.Get(coreosPullSecretNamespace, coreosPullSecretName)
@@ -47,11 +49,15 @@ func (h *Handler) copyDefaultClusterPullSecret(secret *corev1.Secret) error {
 func secretsWeCareAbout(secret *corev1.Secret) bool {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	kubeSecret := secret.Name == coreosPullSecretName && secret.Namespace == coreosPullSecretNamespace
 	openshiftSecret := secret.Name == v1.SamplesRegistryCredentials && secret.Namespace == "openshift"
 	return kubeSecret || openshiftSecret
 }
 func (h *Handler) manageDockerCfgSecret(deleted bool, cfg *v1.Config, secret *corev1.Secret) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	if !secretsWeCareAbout(secret) {
@@ -92,6 +98,8 @@ func (h *Handler) manageDockerCfgSecret(deleted bool, cfg *v1.Config, secret *co
 func (h *Handler) WaitingForCredential(cfg *v1.Config) (bool, bool) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_, err := h.secretclientwrapper.Get("openshift", v1.SamplesRegistryCredentials)
 	if err != nil {
 		cred := cfg.Condition(v1.ImportCredentialsExist)
@@ -108,6 +116,8 @@ func (h *Handler) WaitingForCredential(cfg *v1.Config) (bool, bool) {
 	return false, false
 }
 func (h *Handler) processSecretEvent(cfg *v1.Config, dockercfgSecret *corev1.Secret, event v1.Event) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	if cache.UpsertsAmount() > 0 {

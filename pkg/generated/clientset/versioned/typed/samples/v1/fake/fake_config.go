@@ -18,6 +18,8 @@ var configsKind = schema.GroupVersionKind{Group: "samples.operator.openshift.io"
 func (c *FakeConfigs) Get(name string, options v1.GetOptions) (result *samplesv1.Config, err error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	obj, err := c.Fake.Invokes(testing.NewRootGetAction(configsResource, name), &samplesv1.Config{})
 	if obj == nil {
 		return nil, err
@@ -25,6 +27,8 @@ func (c *FakeConfigs) Get(name string, options v1.GetOptions) (result *samplesv1
 	return obj.(*samplesv1.Config), err
 }
 func (c *FakeConfigs) List(opts v1.ListOptions) (result *samplesv1.ConfigList, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	obj, err := c.Fake.Invokes(testing.NewRootListAction(configsResource, configsKind, opts), &samplesv1.ConfigList{})
@@ -46,9 +50,13 @@ func (c *FakeConfigs) List(opts v1.ListOptions) (result *samplesv1.ConfigList, e
 func (c *FakeConfigs) Watch(opts v1.ListOptions) (watch.Interface, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return c.Fake.InvokesWatch(testing.NewRootWatchAction(configsResource, opts))
 }
 func (c *FakeConfigs) Create(config *samplesv1.Config) (result *samplesv1.Config, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	obj, err := c.Fake.Invokes(testing.NewRootCreateAction(configsResource, config), &samplesv1.Config{})
@@ -60,6 +68,8 @@ func (c *FakeConfigs) Create(config *samplesv1.Config) (result *samplesv1.Config
 func (c *FakeConfigs) Update(config *samplesv1.Config) (result *samplesv1.Config, err error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	obj, err := c.Fake.Invokes(testing.NewRootUpdateAction(configsResource, config), &samplesv1.Config{})
 	if obj == nil {
 		return nil, err
@@ -67,6 +77,8 @@ func (c *FakeConfigs) Update(config *samplesv1.Config) (result *samplesv1.Config
 	return obj.(*samplesv1.Config), err
 }
 func (c *FakeConfigs) UpdateStatus(config *samplesv1.Config) (*samplesv1.Config, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	obj, err := c.Fake.Invokes(testing.NewRootUpdateSubresourceAction(configsResource, "status", config), &samplesv1.Config{})
@@ -78,10 +90,14 @@ func (c *FakeConfigs) UpdateStatus(config *samplesv1.Config) (*samplesv1.Config,
 func (c *FakeConfigs) Delete(name string, options *v1.DeleteOptions) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_, err := c.Fake.Invokes(testing.NewRootDeleteAction(configsResource, name), &samplesv1.Config{})
 	return err
 }
 func (c *FakeConfigs) DeleteCollection(options *v1.DeleteOptions, listOptions v1.ListOptions) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	action := testing.NewRootDeleteCollectionAction(configsResource, listOptions)
@@ -89,6 +105,8 @@ func (c *FakeConfigs) DeleteCollection(options *v1.DeleteOptions, listOptions v1
 	return err
 }
 func (c *FakeConfigs) Patch(name string, pt types.PatchType, data []byte, subresources ...string) (result *samplesv1.Config, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	obj, err := c.Fake.Invokes(testing.NewRootPatchSubresourceAction(configsResource, name, data, subresources...), &samplesv1.Config{})

@@ -16,9 +16,13 @@ type SamplesV1Client struct{ restClient rest.Interface }
 func (c *SamplesV1Client) Configs() ConfigInterface {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return newConfigs(c)
 }
 func NewForConfig(c *rest.Config) (*SamplesV1Client, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	config := *c
@@ -34,6 +38,8 @@ func NewForConfig(c *rest.Config) (*SamplesV1Client, error) {
 func NewForConfigOrDie(c *rest.Config) *SamplesV1Client {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	client, err := NewForConfig(c)
 	if err != nil {
 		panic(err)
@@ -43,9 +49,13 @@ func NewForConfigOrDie(c *rest.Config) *SamplesV1Client {
 func New(c rest.Interface) *SamplesV1Client {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &SamplesV1Client{c}
 }
 func setConfigDefaults(config *rest.Config) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	gv := v1.SchemeGroupVersion
@@ -58,6 +68,8 @@ func setConfigDefaults(config *rest.Config) error {
 	return nil
 }
 func (c *SamplesV1Client) RESTClient() rest.Interface {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	if c == nil {

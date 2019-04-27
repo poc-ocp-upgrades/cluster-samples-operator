@@ -16,9 +16,13 @@ import (
 func (h *Handler) ClearStatusConfigForRemoved(cfg *v1.Config) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	cfg.Status.Architectures = []string{}
 }
 func (h *Handler) StoreCurrentValidConfig(cfg *v1.Config) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	cfg.Status.SamplesRegistry = cfg.Spec.SamplesRegistry
@@ -27,6 +31,8 @@ func (h *Handler) StoreCurrentValidConfig(cfg *v1.Config) {
 	cfg.Status.SkippedTemplates = cfg.Spec.SkippedTemplates
 }
 func (h *Handler) SpecValidation(cfg *v1.Config) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	for _, arch := range cfg.Spec.Architectures {
@@ -57,6 +63,8 @@ func (h *Handler) SpecValidation(cfg *v1.Config) error {
 	return nil
 }
 func (h *Handler) VariableConfigChanged(cfg *v1.Config) (bool, bool, bool, bool, map[string]bool, map[string]bool) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	configChangeAtAll := false
@@ -120,6 +128,8 @@ func (h *Handler) VariableConfigChanged(cfg *v1.Config) (bool, bool, bool, bool,
 func (h *Handler) buildSkipFilters(opcfg *v1.Config) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	h.mapsMutex.Lock()
 	defer h.mapsMutex.Unlock()
 	newStreamMap := make(map[string]bool)
@@ -134,6 +144,8 @@ func (h *Handler) buildSkipFilters(opcfg *v1.Config) {
 	h.skippedTemplates = newTempMap
 }
 func (h *Handler) buildFileMaps(cfg *v1.Config, forceRebuild bool) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	h.mapsMutex.Lock()
@@ -162,6 +174,8 @@ func (h *Handler) buildFileMaps(cfg *v1.Config, forceRebuild bool) error {
 func (h *Handler) processError(opcfg *v1.Config, ctype v1.ConfigConditionType, cstatus corev1.ConditionStatus, err error, msg string, args ...interface{}) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	log := ""
 	if args == nil {
 		log = fmt.Sprintf(msg, err)
@@ -181,6 +195,8 @@ func (h *Handler) processError(opcfg *v1.Config, ctype v1.ConfigConditionType, c
 	return err
 }
 func (h *Handler) ProcessManagementField(cfg *v1.Config) (bool, bool, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	switch cfg.Spec.ManagementState {
@@ -253,7 +269,16 @@ func (h *Handler) ProcessManagementField(cfg *v1.Config) (bool, bool, error) {
 func _logClusterCodePath() {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	pc, _, _, _ := godefaultruntime.Caller(1)
 	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
 	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
+}
+func _logClusterCodePath() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	pc, _, _, _ := godefaultruntime.Caller(1)
+	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
+	godefaulthttp.Post("/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
 }

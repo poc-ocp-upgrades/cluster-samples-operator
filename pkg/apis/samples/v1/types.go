@@ -74,6 +74,8 @@ type ConfigCondition struct {
 func (s *Config) ConditionTrue(c ConfigConditionType) bool {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if s.Status.Conditions == nil {
 		return false
 	}
@@ -85,6 +87,8 @@ func (s *Config) ConditionTrue(c ConfigConditionType) bool {
 	return false
 }
 func (s *Config) ConditionFalse(c ConfigConditionType) bool {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	if s.Status.Conditions == nil {
@@ -100,6 +104,8 @@ func (s *Config) ConditionFalse(c ConfigConditionType) bool {
 func (s *Config) ConditionUnknown(c ConfigConditionType) bool {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if s.Status.Conditions == nil {
 		return false
 	}
@@ -113,6 +119,8 @@ func (s *Config) ConditionUnknown(c ConfigConditionType) bool {
 func (s *Config) AnyConditionUnknown() bool {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	for _, rc := range s.Status.Conditions {
 		if rc.Status == corev1.ConditionUnknown {
 			return true
@@ -121,6 +129,8 @@ func (s *Config) AnyConditionUnknown() bool {
 	return false
 }
 func (s *Config) ConditionsMessages() string {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	consolidatedMessage := ""
@@ -134,6 +144,8 @@ func (s *Config) ConditionsMessages() string {
 func (s *Config) ConditionUpdate(c *ConfigCondition) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if s.Status.Conditions == nil {
 		return
 	}
@@ -145,6 +157,8 @@ func (s *Config) ConditionUpdate(c *ConfigCondition) {
 	}
 }
 func (s *Config) Condition(c ConfigConditionType) *ConfigCondition {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	if s.Status.Conditions != nil {
@@ -162,6 +176,8 @@ func (s *Config) Condition(c ConfigConditionType) *ConfigCondition {
 func (s *Config) NameInReason(reason, name string) bool {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	switch {
 	case strings.Index(reason, name+" ") == 0:
 		return true
@@ -172,6 +188,8 @@ func (s *Config) NameInReason(reason, name string) bool {
 	}
 }
 func (s *Config) ClearNameInReason(reason, name string) string {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	switch {
@@ -193,6 +211,8 @@ const (
 func (s *Config) ClusterOperatorStatusAvailableCondition() (configv1.ConditionStatus, string) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	falseRC := configv1.ConditionFalse
 	if !s.ConditionTrue(SamplesExist) {
 		return falseRC, ""
@@ -204,6 +224,8 @@ func (s *Config) ClusterOperatorStatusAvailableCondition() (configv1.ConditionSt
 	return configv1.ConditionTrue, fmt.Sprintf(installed, versionToNote)
 }
 func (s *Config) ClusterOperatorStatusFailingCondition() (configv1.ConditionStatus, string, string) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	if len(s.Status.Conditions) < numconfigConditionType {
@@ -224,6 +246,8 @@ func (s *Config) ClusterOperatorStatusFailingCondition() (configv1.ConditionStat
 func (s *Config) ClusterOperatorStatusProgressingCondition(failingState string, available configv1.ConditionStatus) (configv1.ConditionStatus, string) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if len(failingState) > 0 {
 		return configv1.ConditionTrue, fmt.Sprintf(noInstallDetailed, os.Getenv("RELEASE_VERSION"), failingState)
 	}
@@ -236,6 +260,8 @@ func (s *Config) ClusterOperatorStatusProgressingCondition(failingState string, 
 	return configv1.ConditionFalse, ""
 }
 func (s *Config) ClusterNeedsCreds() bool {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	if strings.TrimSpace(s.Spec.SamplesRegistry) != "" && strings.TrimSpace(s.Spec.SamplesRegistry) != "registry.redhat.io" {

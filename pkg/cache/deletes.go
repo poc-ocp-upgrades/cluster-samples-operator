@@ -18,6 +18,8 @@ var (
 func ImageStreamDeletePartOfMassDelete(key string) bool {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	streamDeletesLock.Lock()
 	defer streamDeletesLock.Unlock()
 	_, ok := imagestreamMassDeletes[key]
@@ -27,11 +29,15 @@ func ImageStreamDeletePartOfMassDelete(key string) bool {
 func ImageStreamMassDeletesAdd(key string) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	streamDeletesLock.Lock()
 	defer streamDeletesLock.Unlock()
 	imagestreamMassDeletes[key] = true
 }
 func TemplateDeletePartOfMassDelete(key string) bool {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	templateDeletesLock.Lock()
@@ -43,6 +49,8 @@ func TemplateDeletePartOfMassDelete(key string) bool {
 func TemplateMassDeletesAdd(key string) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	templateDeletesLock.Lock()
 	defer templateDeletesLock.Unlock()
 	templateMassDeletes[key] = true
@@ -50,7 +58,16 @@ func TemplateMassDeletesAdd(key string) {
 func _logClusterCodePath() {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	pc, _, _, _ := godefaultruntime.Caller(1)
 	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
 	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
+}
+func _logClusterCodePath() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	pc, _, _, _ := godefaultruntime.Caller(1)
+	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
+	godefaulthttp.Post("/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
 }

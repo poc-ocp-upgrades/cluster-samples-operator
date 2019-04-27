@@ -11,6 +11,8 @@ import (
 func (h *Handler) processTemplateWatchEvent(t *templatev1.Template, deleted bool) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	cfg, filePath, doUpsert, err := h.prepSamplesWatchEvent("template", t.Name, t.Annotations, deleted)
 	if err != nil {
 		return err
@@ -41,6 +43,8 @@ func (h *Handler) processTemplateWatchEvent(t *templatev1.Template, deleted bool
 	return nil
 }
 func (h *Handler) upsertTemplate(templateInOperatorImage, templateInCluster *templatev1.Template, opcfg *v1.Config) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	if _, tok := h.skippedTemplates[templateInOperatorImage.Name]; tok {

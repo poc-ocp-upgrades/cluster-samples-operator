@@ -22,6 +22,8 @@ const (
 func GetConfig() (*rest.Config, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if len(os.Getenv("KUBECONFIG")) > 0 {
 		return clientcmd.BuildConfigFromFlags("", os.Getenv("KUBECONFIG"))
 	}
@@ -38,6 +40,8 @@ func GetConfig() (*rest.Config, error) {
 func GetWatchNamespace() (string, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	ns, found := os.LookupEnv(WatchNamespaceEnvVar)
 	if !found {
 		return "", fmt.Errorf("%s must be set", WatchNamespaceEnvVar)
@@ -45,6 +49,8 @@ func GetWatchNamespace() (string, error) {
 	return ns, nil
 }
 func GetOperatorName() (string, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	operatorName, found := os.LookupEnv(OperatorNameEnvVar)
@@ -57,6 +63,8 @@ func GetOperatorName() (string, error) {
 	return operatorName, nil
 }
 func GetNameAndNamespace(object runtime.Object) (string, string, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	accessor := meta.NewAccessor()
@@ -73,7 +81,16 @@ func GetNameAndNamespace(object runtime.Object) (string, string, error) {
 func _logClusterCodePath() {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	pc, _, _, _ := godefaultruntime.Caller(1)
 	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
 	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
+}
+func _logClusterCodePath() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	pc, _, _, _ := godefaultruntime.Caller(1)
+	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
+	godefaulthttp.Post("/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
 }

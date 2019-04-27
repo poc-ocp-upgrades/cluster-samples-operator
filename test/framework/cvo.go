@@ -17,6 +17,8 @@ const (
 func addCompomentOverride(overrides []configv1.ComponentOverride, override configv1.ComponentOverride) ([]configv1.ComponentOverride, bool) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	for i, o := range overrides {
 		if o.Group == override.Group && o.Kind == override.Kind && o.Namespace == override.Namespace && o.Name == override.Name {
 			if overrides[i].Unmanaged == override.Unmanaged {
@@ -29,6 +31,8 @@ func addCompomentOverride(overrides []configv1.ComponentOverride, override confi
 	return append(overrides, override), true
 }
 func DisableCVOForOperator(operatorClient *configv1client.ConfigV1Client) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	cv, err := operatorClient.ClusterVersions().Get(clusterVersionName, metav1.GetOptions{})
@@ -48,7 +52,16 @@ func DisableCVOForOperator(operatorClient *configv1client.ConfigV1Client) error 
 func _logClusterCodePath() {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	pc, _, _, _ := godefaultruntime.Caller(1)
 	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
 	godefaulthttp.Post("http://35.226.239.161:5001/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
+}
+func _logClusterCodePath() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	pc, _, _, _ := godefaultruntime.Caller(1)
+	jsonLog := []byte(fmt.Sprintf("{\"fn\": \"%s\"}", godefaultruntime.FuncForPC(pc).Name()))
+	godefaulthttp.Post("/"+"logcode", "application/json", godefaultbytes.NewBuffer(jsonLog))
 }

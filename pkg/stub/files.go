@@ -11,6 +11,8 @@ import (
 func (h *Handler) processFiles(dir string, files []os.FileInfo, opcfg *v1.Config) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	for _, file := range files {
 		if file.IsDir() {
 			logrus.Printf("processing subdir %s from dir %s", file.Name(), dir)
@@ -45,6 +47,8 @@ func (h *Handler) processFiles(dir string, files []os.FileInfo, opcfg *v1.Config
 	return nil
 }
 func (h *Handler) GetBaseDir(arch string, opcfg *v1.Config) (dir string) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	switch arch {

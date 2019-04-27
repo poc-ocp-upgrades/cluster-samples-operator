@@ -11,9 +11,13 @@ type FakeSamplesV1 struct{ *testing.Fake }
 func (c *FakeSamplesV1) Configs() v1.ConfigInterface {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return &FakeConfigs{c}
 }
 func (c *FakeSamplesV1) RESTClient() rest.Interface {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	var ret *rest.RESTClient

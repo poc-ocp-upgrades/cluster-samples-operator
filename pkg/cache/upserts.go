@@ -17,6 +17,8 @@ var (
 func AddUpsert(key string) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	upsertsLock.Lock()
 	defer upsertsLock.Unlock()
 	if len(upserts) == 0 {
@@ -27,11 +29,15 @@ func AddUpsert(key string) {
 func RemoveUpsert(key string) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	upsertsLock.Lock()
 	defer upsertsLock.Unlock()
 	delete(upserts, key)
 }
 func AllUpsertEventsArrived() bool {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	upsertsLock.Lock()
@@ -52,11 +58,15 @@ func AllUpsertEventsArrived() bool {
 func AddReceivedEventFromUpsert(stream *imagev1.ImageStream) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	upsertsLock.Lock()
 	defer upsertsLock.Unlock()
 	upserts[stream.Name] = stream
 }
 func GetUpsertImageStreams() map[string]*imagev1.ImageStream {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	upsertsLock.Lock()
@@ -70,11 +80,15 @@ func GetUpsertImageStreams() map[string]*imagev1.ImageStream {
 func ClearUpsertsCache() {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	upsertsLock.Lock()
 	defer upsertsLock.Unlock()
 	upserts = map[string]*imagev1.ImageStream{}
 }
 func UpsertsAmount() int {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	upsertsLock.Lock()

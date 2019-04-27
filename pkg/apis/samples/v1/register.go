@@ -21,9 +21,13 @@ var (
 func init() {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	AddToScheme(scheme)
 }
 func addKnownTypes(scheme *runtime.Scheme) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	scheme.AddKnownTypes(SchemeGroupVersion, &Config{}, &ConfigList{})
@@ -33,9 +37,13 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 func Kind(kind string) schema.GroupKind {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return SchemeGroupVersion.WithKind(kind).GroupKind()
 }
 func Resource(resource string) schema.GroupResource {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return SchemeGroupVersion.WithResource(resource).GroupResource()

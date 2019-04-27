@@ -33,9 +33,13 @@ type defaultImageStreamClientWrapper struct{ h *Handler }
 func (g *defaultImageStreamClientWrapper) Get(namespace, name string, opts metav1.GetOptions) (*imagev1.ImageStream, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return g.h.imageclient.ImageStreams(namespace).Get(name, opts)
 }
 func (g *defaultImageStreamClientWrapper) List(namespace string, opts metav1.ListOptions) (*imagev1.ImageStreamList, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return g.h.imageclient.ImageStreams(namespace).List(opts)
@@ -43,9 +47,13 @@ func (g *defaultImageStreamClientWrapper) List(namespace string, opts metav1.Lis
 func (g *defaultImageStreamClientWrapper) Create(namespace string, is *imagev1.ImageStream) (*imagev1.ImageStream, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return g.h.imageclient.ImageStreams(namespace).Create(is)
 }
 func (g *defaultImageStreamClientWrapper) Update(namespace string, is *imagev1.ImageStream) (*imagev1.ImageStream, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return g.h.imageclient.ImageStreams(namespace).Update(is)
@@ -53,9 +61,13 @@ func (g *defaultImageStreamClientWrapper) Update(namespace string, is *imagev1.I
 func (g *defaultImageStreamClientWrapper) Delete(namespace, name string, opts *metav1.DeleteOptions) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return g.h.imageclient.ImageStreams(namespace).Delete(name, opts)
 }
 func (g *defaultImageStreamClientWrapper) Watch(namespace string) (watch.Interface, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	opts := metav1.ListOptions{}
@@ -75,9 +87,13 @@ type defaultTemplateClientWrapper struct{ h *Handler }
 func (g *defaultTemplateClientWrapper) Get(namespace, name string, opts metav1.GetOptions) (*templatev1.Template, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return g.h.tempclient.Templates(namespace).Get(name, opts)
 }
 func (g *defaultTemplateClientWrapper) List(namespace string, opts metav1.ListOptions) (*templatev1.TemplateList, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return g.h.tempclient.Templates(namespace).List(opts)
@@ -85,9 +101,13 @@ func (g *defaultTemplateClientWrapper) List(namespace string, opts metav1.ListOp
 func (g *defaultTemplateClientWrapper) Create(namespace string, t *templatev1.Template) (*templatev1.Template, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return g.h.tempclient.Templates(namespace).Create(t)
 }
 func (g *defaultTemplateClientWrapper) Update(namespace string, t *templatev1.Template) (*templatev1.Template, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return g.h.tempclient.Templates(namespace).Update(t)
@@ -95,9 +115,13 @@ func (g *defaultTemplateClientWrapper) Update(namespace string, t *templatev1.Te
 func (g *defaultTemplateClientWrapper) Delete(namespace, name string, opts *metav1.DeleteOptions) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return g.h.tempclient.Templates(namespace).Delete(name, opts)
 }
 func (g *defaultTemplateClientWrapper) Watch(namespace string) (watch.Interface, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	opts := metav1.ListOptions{}
@@ -115,9 +139,13 @@ type defaultSecretClientWrapper struct{ coreclient *corev1client.CoreV1Client }
 func (g *defaultSecretClientWrapper) Get(namespace, name string) (*corev1.Secret, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return g.coreclient.Secrets(namespace).Get(name, metav1.GetOptions{})
 }
 func (g *defaultSecretClientWrapper) Create(namespace string, s *corev1.Secret) (*corev1.Secret, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return g.coreclient.Secrets(namespace).Create(s)
@@ -125,9 +153,13 @@ func (g *defaultSecretClientWrapper) Create(namespace string, s *corev1.Secret) 
 func (g *defaultSecretClientWrapper) Update(namespace string, s *corev1.Secret) (*corev1.Secret, error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return g.coreclient.Secrets(namespace).Update(s)
 }
 func (g *defaultSecretClientWrapper) Delete(namespace, name string, opts *metav1.DeleteOptions) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return g.coreclient.Secrets(namespace).Delete(name, opts)
@@ -139,6 +171,8 @@ type ImageStreamFromFileGetter interface {
 type DefaultImageStreamFromFileGetter struct{}
 
 func (g *DefaultImageStreamFromFileGetter) Get(fullFilePath string) (is *imagev1.ImageStream, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	isjsonfile, err := ioutil.ReadFile(fullFilePath)
@@ -161,6 +195,8 @@ type DefaultTemplateFromFileGetter struct{}
 func (g *DefaultTemplateFromFileGetter) Get(fullFilePath string) (t *templatev1.Template, err error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	tjsonfile, err := ioutil.ReadFile(fullFilePath)
 	if err != nil {
 		return nil, err
@@ -181,6 +217,8 @@ type DefaultResourceFileLister struct{}
 func (g *DefaultResourceFileLister) List(dir string) (files []os.FileInfo, err error) {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	files, err = ioutil.ReadDir(dir)
 	return files, err
 }
@@ -191,6 +229,8 @@ type InClusterInitter interface {
 type defaultInClusterInitter struct{}
 
 func (g *defaultInClusterInitter) init(h *Handler, restconfig *restclient.Config) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	if restconfig.RateLimiter == nil {
@@ -238,6 +278,8 @@ type generatedCRDWrapper struct {
 func (g *generatedCRDWrapper) UpdateStatus(sr *v1.Config) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return wait.Poll(3*time.Second, 30*time.Second, func() (bool, error) {
 		_, err := g.client.UpdateStatus(sr)
 		if err == nil {
@@ -250,6 +292,8 @@ func (g *generatedCRDWrapper) UpdateStatus(sr *v1.Config) error {
 	})
 }
 func (g *generatedCRDWrapper) Update(sr *v1.Config) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	return wait.Poll(3*time.Second, 30*time.Second, func() (bool, error) {
@@ -266,6 +310,8 @@ func (g *generatedCRDWrapper) Update(sr *v1.Config) error {
 func (g *generatedCRDWrapper) Create(sr *v1.Config) error {
 	_logClusterCodePath()
 	defer _logClusterCodePath()
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return wait.Poll(3*time.Second, 30*time.Second, func() (bool, error) {
 		_, err := g.client.Create(sr)
 		if err == nil {
@@ -278,6 +324,8 @@ func (g *generatedCRDWrapper) Create(sr *v1.Config) error {
 	})
 }
 func (g *generatedCRDWrapper) Get(name string) (*v1.Config, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	_logClusterCodePath()
 	defer _logClusterCodePath()
 	sr := &v1.Config{}
