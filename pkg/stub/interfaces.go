@@ -5,9 +5,7 @@ import (
 	"io/ioutil"
 	"os"
 	"time"
-
 	"k8s.io/client-go/util/flowcontrol"
-
 	imagev1 "github.com/openshift/api/image/v1"
 	templatev1 "github.com/openshift/api/template/v1"
 	configv1client "github.com/openshift/client-go/config/clientset/versioned/typed/config/v1"
@@ -30,32 +28,36 @@ type ImageStreamClientWrapper interface {
 	Delete(namespace, name string, opts *metav1.DeleteOptions) error
 	Watch(namespace string) (watch.Interface, error)
 }
-
-type defaultImageStreamClientWrapper struct {
-	h *Handler
-}
+type defaultImageStreamClientWrapper struct{ h *Handler }
 
 func (g *defaultImageStreamClientWrapper) Get(namespace, name string, opts metav1.GetOptions) (*imagev1.ImageStream, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return g.h.imageclient.ImageStreams(namespace).Get(name, opts)
 }
-
 func (g *defaultImageStreamClientWrapper) List(namespace string, opts metav1.ListOptions) (*imagev1.ImageStreamList, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return g.h.imageclient.ImageStreams(namespace).List(opts)
 }
-
 func (g *defaultImageStreamClientWrapper) Create(namespace string, is *imagev1.ImageStream) (*imagev1.ImageStream, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return g.h.imageclient.ImageStreams(namespace).Create(is)
 }
-
 func (g *defaultImageStreamClientWrapper) Update(namespace string, is *imagev1.ImageStream) (*imagev1.ImageStream, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return g.h.imageclient.ImageStreams(namespace).Update(is)
 }
-
 func (g *defaultImageStreamClientWrapper) Delete(namespace, name string, opts *metav1.DeleteOptions) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return g.h.imageclient.ImageStreams(namespace).Delete(name, opts)
 }
-
 func (g *defaultImageStreamClientWrapper) Watch(namespace string) (watch.Interface, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	opts := metav1.ListOptions{}
 	return g.h.imageclient.ImageStreams(namespace).Watch(opts)
 }
@@ -68,32 +70,36 @@ type TemplateClientWrapper interface {
 	Delete(namespace, name string, opts *metav1.DeleteOptions) error
 	Watch(namespace string) (watch.Interface, error)
 }
-
-type defaultTemplateClientWrapper struct {
-	h *Handler
-}
+type defaultTemplateClientWrapper struct{ h *Handler }
 
 func (g *defaultTemplateClientWrapper) Get(namespace, name string, opts metav1.GetOptions) (*templatev1.Template, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return g.h.tempclient.Templates(namespace).Get(name, opts)
 }
-
 func (g *defaultTemplateClientWrapper) List(namespace string, opts metav1.ListOptions) (*templatev1.TemplateList, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return g.h.tempclient.Templates(namespace).List(opts)
 }
-
 func (g *defaultTemplateClientWrapper) Create(namespace string, t *templatev1.Template) (*templatev1.Template, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return g.h.tempclient.Templates(namespace).Create(t)
 }
-
 func (g *defaultTemplateClientWrapper) Update(namespace string, t *templatev1.Template) (*templatev1.Template, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return g.h.tempclient.Templates(namespace).Update(t)
 }
-
 func (g *defaultTemplateClientWrapper) Delete(namespace, name string, opts *metav1.DeleteOptions) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return g.h.tempclient.Templates(namespace).Delete(name, opts)
 }
-
 func (g *defaultTemplateClientWrapper) Watch(namespace string) (watch.Interface, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	opts := metav1.ListOptions{}
 	return g.h.tempclient.Templates(namespace).Watch(opts)
 }
@@ -104,57 +110,57 @@ type SecretClientWrapper interface {
 	Update(namespace string, s *corev1.Secret) (*corev1.Secret, error)
 	Delete(namespace, name string, opts *metav1.DeleteOptions) error
 }
-
-type defaultSecretClientWrapper struct {
-	coreclient *corev1client.CoreV1Client
-}
+type defaultSecretClientWrapper struct{ coreclient *corev1client.CoreV1Client }
 
 func (g *defaultSecretClientWrapper) Get(namespace, name string) (*corev1.Secret, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return g.coreclient.Secrets(namespace).Get(name, metav1.GetOptions{})
 }
-
 func (g *defaultSecretClientWrapper) Create(namespace string, s *corev1.Secret) (*corev1.Secret, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return g.coreclient.Secrets(namespace).Create(s)
 }
-
 func (g *defaultSecretClientWrapper) Update(namespace string, s *corev1.Secret) (*corev1.Secret, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return g.coreclient.Secrets(namespace).Update(s)
 }
-
 func (g *defaultSecretClientWrapper) Delete(namespace, name string, opts *metav1.DeleteOptions) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return g.coreclient.Secrets(namespace).Delete(name, opts)
 }
 
 type ImageStreamFromFileGetter interface {
 	Get(fullFilePath string) (is *imagev1.ImageStream, err error)
 }
-
-type DefaultImageStreamFromFileGetter struct {
-}
+type DefaultImageStreamFromFileGetter struct{}
 
 func (g *DefaultImageStreamFromFileGetter) Get(fullFilePath string) (is *imagev1.ImageStream, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	isjsonfile, err := ioutil.ReadFile(fullFilePath)
 	if err != nil {
 		return nil, err
 	}
-
 	imagestream := &imagev1.ImageStream{}
 	err = json.Unmarshal(isjsonfile, imagestream)
 	if err != nil {
 		return nil, err
 	}
-
 	return imagestream, nil
 }
 
 type TemplateFromFileGetter interface {
 	Get(fullFilePath string) (t *templatev1.Template, err error)
 }
-
-type DefaultTemplateFromFileGetter struct {
-}
+type DefaultTemplateFromFileGetter struct{}
 
 func (g *DefaultTemplateFromFileGetter) Get(fullFilePath string) (t *templatev1.Template, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	tjsonfile, err := ioutil.ReadFile(fullFilePath)
 	if err != nil {
 		return nil, err
@@ -164,31 +170,29 @@ func (g *DefaultTemplateFromFileGetter) Get(fullFilePath string) (t *templatev1.
 	if err != nil {
 		return nil, err
 	}
-
 	return template, nil
 }
 
 type ResourceFileLister interface {
 	List(dir string) (files []os.FileInfo, err error)
 }
-
-type DefaultResourceFileLister struct {
-}
+type DefaultResourceFileLister struct{}
 
 func (g *DefaultResourceFileLister) List(dir string) (files []os.FileInfo, err error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	files, err = ioutil.ReadDir(dir)
 	return files, err
-
 }
 
 type InClusterInitter interface {
 	init(h *Handler, restconfig *restclient.Config)
 }
-
-type defaultInClusterInitter struct {
-}
+type defaultInClusterInitter struct{}
 
 func (g *defaultInClusterInitter) init(h *Handler, restconfig *restclient.Config) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if restconfig.RateLimiter == nil {
 		restconfig.RateLimiter = flowcontrol.NewTokenBucketRateLimiter(50.0, 50)
 	}
@@ -227,12 +231,13 @@ type CRDWrapper interface {
 	Create(Config *v1.Config) (err error)
 	Get(name string) (*v1.Config, error)
 }
-
 type generatedCRDWrapper struct {
 	client sampleclientv1.ConfigInterface
 }
 
 func (g *generatedCRDWrapper) UpdateStatus(sr *v1.Config) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return wait.Poll(3*time.Second, 30*time.Second, func() (bool, error) {
 		_, err := g.client.UpdateStatus(sr)
 		if err == nil {
@@ -243,10 +248,10 @@ func (g *generatedCRDWrapper) UpdateStatus(sr *v1.Config) error {
 		}
 		return false, nil
 	})
-
 }
-
 func (g *generatedCRDWrapper) Update(sr *v1.Config) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return wait.Poll(3*time.Second, 30*time.Second, func() (bool, error) {
 		_, err := g.client.Update(sr)
 		if err == nil {
@@ -257,10 +262,10 @@ func (g *generatedCRDWrapper) Update(sr *v1.Config) error {
 		}
 		return false, nil
 	})
-
 }
-
 func (g *generatedCRDWrapper) Create(sr *v1.Config) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return wait.Poll(3*time.Second, 30*time.Second, func() (bool, error) {
 		_, err := g.client.Create(sr)
 		if err == nil {
@@ -272,8 +277,9 @@ func (g *generatedCRDWrapper) Create(sr *v1.Config) error {
 		return false, nil
 	})
 }
-
 func (g *generatedCRDWrapper) Get(name string) (*v1.Config, error) {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	sr := &v1.Config{}
 	var err error
 	err = wait.Poll(3*time.Second, 30*time.Second, func() (bool, error) {
@@ -290,5 +296,4 @@ func (g *generatedCRDWrapper) Get(name string) (*v1.Config, error) {
 		return nil, err
 	}
 	return sr, nil
-
 }

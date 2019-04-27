@@ -7,38 +7,36 @@ import (
 )
 
 const (
-	Version   = "v1"
-	GroupName = "samples.operator.openshift.io"
+	Version		= "v1"
+	GroupName	= "samples.operator.openshift.io"
 )
 
 var (
-	scheme        = runtime.NewScheme()
-	SchemeBuilder = runtime.NewSchemeBuilder(addKnownTypes)
-	AddToScheme   = SchemeBuilder.AddToScheme
-	// SchemeGroupVersion is the group version used to register these objects.
-	SchemeGroupVersion = schema.GroupVersion{Group: GroupName, Version: Version}
+	scheme			= runtime.NewScheme()
+	SchemeBuilder		= runtime.NewSchemeBuilder(addKnownTypes)
+	AddToScheme		= SchemeBuilder.AddToScheme
+	SchemeGroupVersion	= schema.GroupVersion{Group: GroupName, Version: Version}
 )
 
 func init() {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	AddToScheme(scheme)
 }
-
-// addKnownTypes adds the set of types defined in this package to the supplied scheme.
 func addKnownTypes(scheme *runtime.Scheme) error {
-	scheme.AddKnownTypes(SchemeGroupVersion,
-		&Config{},
-		&ConfigList{},
-	)
+	_logClusterCodePath()
+	defer _logClusterCodePath()
+	scheme.AddKnownTypes(SchemeGroupVersion, &Config{}, &ConfigList{})
 	metav1.AddToGroupVersion(scheme, SchemeGroupVersion)
 	return nil
 }
-
-// Kind takes an unqualified kind and returns back a Group qualified GroupKind
 func Kind(kind string) schema.GroupKind {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return SchemeGroupVersion.WithKind(kind).GroupKind()
 }
-
-// Resource takes an unqualified resource and returns a Group qualified GroupResource
 func Resource(resource string) schema.GroupResource {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	return SchemeGroupVersion.WithResource(resource).GroupResource()
 }
