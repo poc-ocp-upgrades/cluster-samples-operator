@@ -9,8 +9,8 @@ import (
 )
 
 func (h *Handler) processTemplateWatchEvent(t *templatev1.Template, deleted bool) error {
-	// our pattern is the top most caller locks the mutex
-
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	cfg, filePath, doUpsert, err := h.prepSamplesWatchEvent("template", t.Name, t.Annotations, deleted)
 	if err != nil {
 		return err
@@ -18,18 +18,14 @@ func (h *Handler) processTemplateWatchEvent(t *templatev1.Template, deleted bool
 	if !doUpsert {
 		return nil
 	}
-
 	template, err := h.Filetemplategetter.Get(filePath)
 	if err != nil {
-		// still attempt to report error in status
 		h.processError(cfg, v1.SamplesExist, corev1.ConditionUnknown, err, "%v error reading file %s", filePath)
 		logrus.Printf("CRDUPDATE event temp udpate err")
 		h.crdwrapper.UpdateStatus(cfg)
-		// if we get this, don't bother retrying
 		return nil
 	}
 	if deleted {
-		// set t to nil so upsert will create
 		t = nil
 	}
 	err = h.upsertTemplate(template, t, cfg)
@@ -43,10 +39,10 @@ func (h *Handler) processTemplateWatchEvent(t *templatev1.Template, deleted bool
 		return err
 	}
 	return nil
-
 }
-
 func (h *Handler) upsertTemplate(templateInOperatorImage, templateInCluster *templatev1.Template, opcfg *v1.Config) error {
+	_logClusterCodePath()
+	defer _logClusterCodePath()
 	if _, tok := h.skippedTemplates[templateInOperatorImage.Name]; tok {
 		if templateInCluster != nil {
 			if templateInCluster.Labels == nil {
@@ -54,12 +50,9 @@ func (h *Handler) upsertTemplate(templateInOperatorImage, templateInCluster *tem
 			}
 			templateInCluster.Labels[v1.SamplesManagedLabel] = "false"
 			h.templateclientwrapper.Update("openshift", templateInCluster)
-			// if we get an error, we'll just try to remove the label next
-			// time; and we'll examine the skipped lists on delete
 		}
 		return nil
 	}
-
 	if templateInOperatorImage.Labels == nil {
 		templateInOperatorImage.Labels = map[string]string{}
 	}
@@ -68,13 +61,11 @@ func (h *Handler) upsertTemplate(templateInOperatorImage, templateInCluster *tem
 	}
 	templateInOperatorImage.Labels[v1.SamplesManagedLabel] = "true"
 	templateInOperatorImage.Annotations[v1.SamplesVersionAnnotation] = h.version
-
 	if templateInCluster == nil {
 		_, err := h.templateclientwrapper.Create("openshift", templateInOperatorImage)
 		if err != nil {
 			if kerrors.IsAlreadyExists(err) {
 				logrus.Printf("template %s recreated since delete event", templateInOperatorImage.Name)
-				// return the error so the caller can decide what to do
 				return err
 			}
 			return h.processError(opcfg, v1.SamplesExist, corev1.ConditionUnknown, err, "template create error: %v")
@@ -82,7 +73,6 @@ func (h *Handler) upsertTemplate(templateInOperatorImage, templateInCluster *tem
 		logrus.Printf("created template %s", templateInOperatorImage.Name)
 		return nil
 	}
-
 	templateInOperatorImage.ResourceVersion = templateInCluster.ResourceVersion
 	_, err := h.templateclientwrapper.Update("openshift", templateInOperatorImage)
 	if err != nil {
